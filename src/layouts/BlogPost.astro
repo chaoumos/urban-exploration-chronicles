@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+interface Props {
+	title: string;
+	description: string;
+pubDate: string;
+}
+
+const { title, description, pubDate } = Astro.props;
+const formattedDate = new Date(pubDate).toLocaleDateString();
+---
+
+<Layout title={title} description={description}>
+	<main class="container mx-auto mt-10 px-4">
+		<article class="mb-8">
+			<h1 class="text-3xl font-bold mb-4 text-accent">{title}</h1>
+			<p class="text-gray-400 mb-2">Published: {formattedDate}</p>
+			<p class="text-lg mb-6">{description}</p>
+			<slot />
+		</article>
+		<a href="/blog" class="text-blue-500 hover:underline">Back to Blog</a>
+	</main>
+</Layout>

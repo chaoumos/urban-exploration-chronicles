@@ -1,0 +1,51 @@
+---
+import type { Props as GlobalLayoutProps } from 'src/types';
+
+interface Props extends GlobalLayoutProps {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="description" content={description}>
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+	<meta name="generator" content={Astro.generator} />
+	<title>{Astro.props.title || `${ "Urban Exploration Chronicles: Rediscovering the Past" }`}</title>
+</head>
+<body class="bg-dark-gray text-light-gray font-serif">
+  <header class="bg-black py-4 shadow-md">
+    <div class="container mx-auto px-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold text-white hover:text-accent">Urban Exploration Chronicles</a>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="/" class="hover:text-accent">Home</a></li>
+          <li><a href="/blog" class="hover:text-accent">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+	<slot />
+	<footer class="bg-black py-4 mt-8 text-center">
+		<div class="container mx-auto px-4">
+			<p>© {new Date().getFullYear()} Urban Exploration Chronicles: Rediscovering the Past</p>
+		</div>
+	</footer>
+</body></html>
+
+<style is:global>
+ html {
+		font-family: system-ui, sans-serif;
+		background-color: #F6F6F6;
+	}
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
+	}
+</style>

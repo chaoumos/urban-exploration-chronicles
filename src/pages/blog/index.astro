@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const posts = await Astro.glob('../../content/blog/*.md');
+---
+
+<Layout title="Blog" description="A collection of articles about urban exploration.">
+	<main class="container mx-auto mt-10 px-4">
+		<h1 class="text-4xl font-bold mb-6 text-accent">Blog</h1>
+		<ul class="space-y-4">
+			{posts.map((post) => (
+				<li class="border-b border-gray-700 pb-4">
+					<a href={post.url} class="text-xl font-semibold hover:text-accent">
+						{post.frontmatter.title}
+					</a>
+					<p class="text-gray-400">Published: {new Date(post.frontmatter.pubDate).toLocaleDateString()}</p>
+					<p class="text-gray-300">{post.frontmatter.description}</p>
+				</li>
+			))}
+		</ul>
+	</main>
+</Layout>
